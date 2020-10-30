@@ -46,8 +46,7 @@ class DAO_ingredient implements IDAO_Ingredient{
 
     public function getByName(string $name)
     {
-        $query = $this->pdo->query('SELECT * FROM ingredient WHERE name='.$name);
-
+        $query = $this->pdo->query('SELECT * FROM ingredient WHERE name="'.$name.'"');
         $result = $query->fetch();
 
         if ($result) {

@@ -29,8 +29,8 @@ return function (App $app) {
     });
     $app->get('/recipeByName/{name}', function (Request $request, Response $response, $args) {
         $dao = new DAO_recipe;
-        $id =intval($args['id']);
-        $response->getBody()->write(json_encode($dao->getById($id)));
+        $name =$args['name'];
+        $response->getBody()->write(json_encode($dao->getByName($name)));
         return $response;
     });
 
@@ -48,8 +48,8 @@ return function (App $app) {
     });
     $app->get('/ingredientByName/{name}', function (Request $request, Response $response, $args) {
         $dao = new DAO_ingredient;
-        $name =intval($args['name']);
-        $response->getBody()->write(json_encode($dao->getById($name)));
+        $name =$args['name'];
+        $response->getBody()->write(json_encode($dao->getByName($name)));
         return $response;
     });
 

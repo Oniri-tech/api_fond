@@ -45,7 +45,7 @@ class DAO_recipe implements IDAO_recipe{
 
     public function getByName(string $name){
 
-        $query = $this->pdo->query('SELECT * FROM recipe WHERE name='.$name);
+        $query = $this->pdo->query('SELECT * FROM recipe WHERE name="'.$name.'"');
 
         $result = $query->fetch();
 
