@@ -10,7 +10,7 @@ use App\Entities\Recipe;
         function getById(int $id);
         function getByName(string $name);
 
-        function update(Recipe $recipe);
+        function update(int $id, string $name, string $category, string $picture, int $score);
 
         function delete(int $id);
     }

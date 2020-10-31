@@ -60,14 +60,21 @@ class DAO_recipe implements IDAO_recipe{
         }
     }
 
-    public function update(Recipe $recipe)
+    public function update(int $id, string $name, string $category, string $picture, int $score)
     {
-        $requete = $this->pdo->prepare('UPDATE ingredient SET name='.$recipe->name.',
-                                                            category='.$recipe->category.',
-                                                            picture='.$recipe->picture.',
-                                                            score='.$recipe->score.'
-                                                        WHERE id ='.$recipe->id);
-        $requete->execute();
+        $query = $this->pdo->prepare('UPDATE ingredient SET name='.$name.',
+                                                            category='.$category.',
+                                                            picture='.$picture.',
+                                                            score='.$score.'
+                                                        WHERE id ='.$id);
+        $query->execute();
+
+        if ($query) {
+            return 'Recette '.$name.' modifiée avec succès';
+        }
+        else {
+            return 'Echec de la modification de la recette';
+        }
     }
 
     public function delete(int $id)

@@ -39,6 +39,11 @@ return function (App $app) {
         $response->getBody()->write(json_encode($dao->getById($id)));
         return $response;
     });
+    $app->post('/recipeById/{id}', function (Request $request, Response $response, $args){
+        $dao = new DAO_recipe;
+        $response->getBody()->write($dao->update(intval($args['id']), $_POST['name'], $_POST['category'], $_POST['picture'], intval($_POST['score'])));
+        return $response;
+    });
     $app->get('/recipeByName/{name}', function (Request $request, Response $response, $args) {
         $dao = new DAO_recipe;
         $name =$args['name'];
