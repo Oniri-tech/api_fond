@@ -23,6 +23,11 @@ return function (App $app) {
     /**
      * Routes pour les recettes
      */
+    $app->post('/recette', function (Request $request, Response $response){
+        $dao = new DAO_recipe;
+        $response->getBody()->write($dao->addRecipe($_POST['name'], $_POST['category'], $_POST['picture'], intval($_POST['score'])));
+        return $response;
+    });
     $app->get('/recipes', function (Request $request, Response $response) {
         $dao = new DAO_recipe;
         $response->getBody()->write(json_encode($dao->getAll()));

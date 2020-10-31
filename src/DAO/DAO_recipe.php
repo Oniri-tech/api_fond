@@ -16,8 +16,14 @@ class DAO_recipe implements IDAO_recipe{
 
     public function addRecipe(string $name, string $category, string $picture, int $score)
     {
-        $requete = $this->pdo->prepare('INSERT INTO recipe VALUES ('.$name.','.$category.','.$picture.','.$score.')');
-        $requete->execute();
+        $query = $this->pdo->prepare('INSERT INTO recipe VALUES ('.$name.','.$category.','.$picture.','.$score.')');
+        $query->execute();
+        if ($query) {
+            return 'Recette '.$name.' ajouté avec succès';
+        }
+        else {
+            return 'Echec de l\'ajout de la recette';
+        }
     }
 
     public function getAll(){
