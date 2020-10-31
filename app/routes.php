@@ -15,7 +15,14 @@ return function (App $app) {
         // CORS Pre-Flight OPTIONS Request Handler
         return $response;
     });
+    $app->get('/', function (Request $request, Response $response){
+        $response->getBody()->write('Bienvenue sur l\'index');
+        return $response;
+    });
 
+    /**
+     * Routes pour les recettes
+     */
     $app->get('/recipes', function (Request $request, Response $response) {
         $dao = new DAO_recipe;
         $response->getBody()->write(json_encode($dao->getAll()));
@@ -34,7 +41,14 @@ return function (App $app) {
         return $response;
     });
 
-
+    /**
+     * Routes pour les ingrédients
+     */
+    $app->post('/ingredient', function (Request $request, Response $response){
+        $dao = new DAO_ingredient;
+        $response->getBody()->write($dao->addIngredient($_POST['name']));
+        return $response;
+    });
     $app->get('/ingredients', function (Request $request, Response $response) {
         $dao = new DAO_ingredient;
         $response->getBody()->write(json_encode($dao->getAll()));

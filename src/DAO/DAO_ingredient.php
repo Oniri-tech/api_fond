@@ -16,6 +16,13 @@ class DAO_ingredient implements IDAO_Ingredient{
     public function addIngredient(string $name)
     {
         $query = $this->pdo->prepare('INSERT INTO ingredient VALUES ('.$name.')');
+        $query->execute();
+        if ($query) {
+            return 'Ingrédient '.$name.' ajouté avec succès';
+        }
+        else {
+            return 'Echec de l\'ajout de l\'ingrédient';
+        }
         
     }
 
