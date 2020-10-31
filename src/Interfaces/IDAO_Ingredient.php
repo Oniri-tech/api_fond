@@ -15,7 +15,7 @@ interface IDAO_Ingredient {
     function getByName(string $name);
 
 
-    function update(Ingredient $ingredient);
+    function update(int $id, string $name);
 
 
     function delete(int $id);

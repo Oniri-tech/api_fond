@@ -61,10 +61,17 @@ class DAO_ingredient implements IDAO_Ingredient{
         }
     }
 
-    public function update(Ingredient $ingredient)
+    public function update($id, $name)
     {
-        $requete = $this->pdo->prepare('UPDATE ingredient SET name='.$ingredient->name.' WHERE id ='.$ingredient->id);
-        $requete->execute();
+        $query = $this->pdo->prepare('UPDATE ingredient SET name='.$name.' WHERE id ='.$id);
+        $query->execute();
+
+        if ($query) {
+            return 'Ingrédient '.$name.' modifiée avec succès';
+        }
+        else {
+            return 'Echec de la modification de l\'ingrédient';
+        }
     }
 
     public function delete(int $id)

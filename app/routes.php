@@ -59,6 +59,11 @@ return function (App $app) {
         $response->getBody()->write(json_encode($dao->getAll()));
         return $response;
     });
+    $app->post('/ingredientById/{id}', function (Request $request, Response $response, $args){
+        $dao = new DAO_ingredient;
+        $response->getBody()->write($dao->update(intval($args['id']), $_POST['name']));
+        return $response;
+    });
     $app->get('/ingredientById/{id}', function (Request $request, Response $response, $args) {
         $dao = new DAO_ingredient;
         $id =intval($args['id']);
