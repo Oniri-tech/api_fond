@@ -76,8 +76,15 @@ class DAO_ingredient implements IDAO_Ingredient{
 
     public function delete(int $id)
     {
-        $requete = $this->pdo->prepare('DELETE FROM ingredient WHERE id='.$id);
-        $requete->execute();
+        $query = $this->pdo->prepare('DELETE FROM ingredient WHERE id='.$id);
+        $query->execute();
+
+        if ($query) {
+            return 'Ingrédient supprimé avec succès';
+        }
+        else {
+            return 'Echec de la modification de l\'ingrédient';
+        }
     }
 
     public function sqlToIngredient($line) : Ingredient

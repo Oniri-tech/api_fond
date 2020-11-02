@@ -28,6 +28,11 @@ return function (App $app) {
         $response->getBody()->write($dao->addRecipe($_POST['name'], $_POST['category'], $_POST['picture'], intval($_POST['score'])));
         return $response;
     });
+    $app->delete('/recette/{id}', function (Request $request, Response $response, $args){
+        $dao = new DAO_recipe;
+        $response->getBody()->write($dao->delete(intval($args['id'])));
+        return $response;
+    });
     $app->get('/recipes', function (Request $request, Response $response) {
         $dao = new DAO_recipe;
         $response->getBody()->write(json_encode($dao->getAll()));
@@ -62,6 +67,11 @@ return function (App $app) {
     $app->get('/ingredients', function (Request $request, Response $response) {
         $dao = new DAO_ingredient;
         $response->getBody()->write(json_encode($dao->getAll()));
+        return $response;
+    });
+    $app->delete('/ingredient/{id}', function (Request $request, Response $response, $args){
+        $dao = new DAO_ingredient;
+        $response->getBody()->write($dao->delete(intval($args['id'])));
         return $response;
     });
     $app->post('/ingredientById/{id}', function (Request $request, Response $response, $args){

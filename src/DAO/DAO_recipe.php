@@ -79,8 +79,15 @@ class DAO_recipe implements IDAO_recipe{
 
     public function delete(int $id)
     {
-        $requete = $this->pdo->prepare('DELETE FROM recipe WHERE id='.$id);
-        $requete->execute();
+        $query = $this->pdo->prepare('DELETE FROM recipe WHERE id='.$id);
+        $query->execute();
+
+        if ($query) {
+            return 'Recette supprimée avec succès';
+        }
+        else {
+            return 'Echec de la modification de la recette';
+        }
     }
 
     public function sqlToRecipe($line) : Recipe 
